@@ -4,15 +4,15 @@
 package queue;
 
 /**
- * @author anmishra Sample integer queue (FIFO) implementation using Array
+ * @author anmishra Sample queue (FIFO) implementation using Array
  */
 public class Queue {
 
 	private int capacity = 1;
 	private Object[] objs = new Object[capacity];
-	private int head = 0;
+	private int head;
 	private int tail = -1;
-	private int size = 0;
+	private int size;
 
 	/**
 	 * Enque into queue
@@ -45,7 +45,7 @@ public class Queue {
 	 */
 	public Object dequeue() {
 		Object elem = null;
-		if (tail == -1 || head > tail) {
+		if (size == 0 || head > tail) {
 			throw new RuntimeException("No elem");
 		} else {
 			elem = objs[head];
@@ -90,31 +90,31 @@ public class Queue {
 
 	public static void main(String[] args) {
 		Queue queue = new Queue();
-		System.out.println(queue.size());
+		System.out.println("Size: "+queue.size());
 		queue.enqueue(1);
-		System.out.println(queue.size());
+		System.out.println("Size: "+queue.size());
 		queue.enqueue(2);
-		System.out.println(queue.size());
+		System.out.println("Size: "+queue.size());
 		queue.enqueue(3);
-		System.out.println(queue.size());
+		System.out.println("Size: "+queue.size());
 		queue.enqueue(4);
-		System.out.println(queue.size());
+		System.out.println("Size: "+queue.size());
 		queue.enqueue(5);
-		System.out.println(queue.size());
+		System.out.println("Size: "+queue.size());
 		Queue q2 = new Queue();
 		q2.enqueue(6);
 		q2.enqueue(7);
-		queue.addItems(q2);
-		System.out.println(queue.size());
-		System.out.println(queue.dequeue());
-		System.out.println(queue.size());
-		System.out.println(queue.dequeue());
-		System.out.println(queue.size());
-		System.out.println(queue.dequeue());
-		System.out.println(queue.size());
-		System.out.println(queue.dequeue());
-		System.out.println(queue.size());
-		System.out.println(queue.dequeue());
-		System.out.println(queue.size());
+//		queue.addItems(q2);
+		System.out.println("Size: "+queue.size());
+		System.out.println("Dequeued: "+queue.dequeue());
+		System.out.println("Size: "+queue.size());
+		System.out.println("Dequeued: "+queue.dequeue());
+		System.out.println("Size: "+queue.size());
+		System.out.println("Dequeued: "+queue.dequeue());
+		System.out.println("Size: "+queue.size());
+		System.out.println("Dequeued: "+queue.dequeue());
+		System.out.println("Size: "+queue.size());
+		System.out.println("Dequeued: "+queue.dequeue());
+		System.out.println("Size: "+queue.size());
 	}
 }
