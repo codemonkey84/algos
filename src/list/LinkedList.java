@@ -86,6 +86,19 @@ class LinkedList {
 			return true;
 		}
 	}
+
+	void reverse() {
+		Node nextNode = null;
+		Node prevNode = null;
+		Node currentNode = this.startNode;
+		while (currentNode != null) {
+		  nextNode = currentNode.getNext();
+		  currentNode.setNext(prevNode);
+		  prevNode = currentNode;
+		  currentNode = nextNode;
+		}
+		this.startNode = prevNode;
+	}
 	
 	public String toString() {
 		Node currentNode = this.startNode;
