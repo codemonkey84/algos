@@ -18,13 +18,14 @@ public class Quick {
 
 		// Set the middle elem as pivot
 		int pivot = arr[low + (high - low) / 2];
-
+		System.out.println("pivot: "+pivot);
 		while (i <= j) {
 			/**
 			 * As long as the current elem is lesser than pivot keep on
 			 * comparing the next elem from left division with pivot
 			 */
 			while (arr[i] < pivot) {
+				System.out.println(i);
 				i++;
 			}
 
@@ -48,16 +49,16 @@ public class Quick {
 				i++;
 				j--;
 			}
+		}
 
-			// Recursively sort the left division
-			if (i < high) {
-				quicksort(arr, i, high);
-			}
+		// Recursively sort the left division
+		if (i < high) {
+			quicksort(arr, i, high);
+		}
 
-			// Recursively sort the right division
-			if (j > low) {
-				quicksort(arr, low, j);
-			}
+		// Recursively sort the right division
+		if (j > low) {
+			quicksort(arr, low, j);
 		}
 	}
 

@@ -8,7 +8,6 @@ package stack;
  */
 public class Stack {
 	
-	private int head;
 	private int tail = -1;
 	private int size;
 	private int capacity = 16;
@@ -33,11 +32,11 @@ public class Stack {
 	 */
 	public Object pop() {
 		Object elem = null;
-		if (size == 0 || head > tail) {
+		if (size == 0) {
 			throw new RuntimeException("No elem");
 		}
-		elem = objs[head];
-		++head;
+		elem = objs[tail];
+		--tail;
 		--size;
 		display("pop");
 		return elem;
@@ -49,10 +48,8 @@ public class Stack {
 	 */
 	public Object peek() {
 		Object elem = null;
-		if (size > 0 && head <= tail) {
-			elem = objs[head];
-			++head;
-			--size;
+		if (size > 0) {
+			elem = objs[tail];
 		}
 		return elem;
 	}
@@ -67,7 +64,7 @@ public class Stack {
 	
 	private void display(String op) {
 		System.out.println("After "+op);
-		for (int i = head; i <= tail; i++) {
+		for (int i = 0; i <= tail; i++) {
 			System.out.println(objs[i]);
 		}
 	}
