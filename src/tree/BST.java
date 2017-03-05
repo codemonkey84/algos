@@ -42,16 +42,104 @@ public class BST<E extends Comparable> {
 	}
 
 	/**
+	 * Prune a node lesser than given sum of any path the node belongs to
+	 *
+	 * @param data
+	 * @return Node<E>
+	 */
+	public Node<E> prune(int k, int sum) {
+		Node current = root;
+		if (current == null)
+			return current;
+
+		int lsum += current.data;
+		int rsum = lsum;
+
+		current.left = prune(current.left, k, lsum);
+		current.right = prune(current.right, k, rsum);
+
+		if ((lsum > rsum && lsum < k) || (rsum >= lsum && rsum < k) {
+			current = null;
+		}
+		return current;
+	}
+
+	/**
 	 * Delete a node
 	 * 
 	 * @param data
 	 * @return Node<E>
 	 */
 	public Node<E> delete(E data) {
-		if (search(data) != null && root != null) {
+		/*if (search(data) != null && root != null) {
 			root = deleteRecursively(root, data);
+		}*/
+		Node current = root;
+		Node nodeToBeDeleted = null;
+		Node parent = current;
+		boolean isLeftChild = true;
+		while (current != null) {
+			if (data.compareTo(current.getData()) < 0 ) {
+				parent = current;
+				current = current.getLeft();
+				isLeftChild = true;
+			} else if (data.compareTo(current.getData()) > 0) {
+				parent = current;
+				current = current.getRight();
+				isLeftChild = false;
+			} else {
+				nodeToBeDeleted = current;
+				break;
+			}
 		}
+		if (nodeToBeDeleted == root || nodeToBeDeleted == null) {
+			return null;
+		}
+		if (nodeToBeDeleted != null) {
+			if (nodeToBeDeleted.getLeft() == null && nodeToBeDeleted.getRight() == null) {
+				if (isLeftChild) {
+					parent.setLeft(null);
+				} else {
+					parent.setRight(null);
+				}
+			} else if (nodeToBeDeleted.getLeft() == null) {
+				if (isLeftChild) {
+					parent.setLeft(nodeToBeDeleted.getRight());
+				} else {
+					parent.setRight(nodeToBeDeleted.getRight());
+				}
+			} else if (nodeToBeDeleted.getLeft() == null) {
+				if (isLeftChild) {
+					parent.setLeft(nodeToBeDeleted.getRight());
+				} else {
+					parent.setRight(nodeToBeDeleted.getLeft());
+				}
+			} else {
+				Node successor = successor(nodeToBeDeleted);
+				if (isLeftChild) {
+					parent.setLeft(successor);
+				} else {
+					parent.setRight(successor);
+				}
+			}
+		}
+
 		return root;
+	}
+
+	private Node successor(Node node) {
+		Node successor = node.getRight();
+		Node successorParent = node;
+		while (successor.getLeft() != null) {
+			successorParent = successor;
+			successor = successor.getLeft();
+		}
+		if (successor.getRight() != null) {
+			successorParent.setLeft(successor.getRight());
+			successor.setRight(node.getRight());
+			successor.setLeft(node.getLeft());
+		}
+		return successor;
 	}
 
 	private Node<E> deleteRecursively(Node<E> node, E data) {
