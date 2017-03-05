@@ -59,8 +59,8 @@ public class Kingdom {
 			++path;
 
 			/*
-			 * Check if all the villages are visited at least twice, can't
-			 * reach exit
+			 * Check if all the villages are visited at least twice, if yes 
+			 * destination is unreachable
 			 */
 			int vistiedCount = 0;
 			for (int i = 0; i < villages.length; i++) {
@@ -76,7 +76,7 @@ public class Kingdom {
 		}
 		/* 
 		 * This indicates a village is reached which has neither left nor
-		 * right tunnel. So reached the exit.
+		 * right tunnel. So reached the destination.
 		 */
 		return ""+path;
 	}
