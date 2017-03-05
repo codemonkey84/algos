@@ -13,6 +13,9 @@ class Village {
 		id = i;
 	}
 
+	/*
+	 * Find the distance of a village if it's neighbor to this one
+	 */
 	int neighborDist(Village neighbor) {
 		int dist = Integer.MAX_VALUE;
 		if (this.left == neighbor) {
