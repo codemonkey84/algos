@@ -3,7 +3,8 @@ package sort;
 import java.util.Scanner;
 
 /**
- * 
+ * Fibonacci without recursion
+ *
  * @author anmishra
  */
 public class Fibonacci {

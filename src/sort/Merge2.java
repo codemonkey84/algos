@@ -12,7 +12,7 @@ public class Merge2 {
 	private static int[] sort(int[] arr) {
 		int[] result = new int[arr.length];
 		if (arr.length > 1) {
-			int midIndx = arr.length / 2;
+			int midIndx = (arr.length - 1) / 2;
 			int[] left = new int[midIndx];
 			int[] right;
 			if (midIndx % 2 == 0) {
@@ -24,7 +24,7 @@ public class Merge2 {
 				left[i] = arr[i];
 			}
 			for (int j = midIndx, k = 0; j < arr.length; j++, k++) {
-				right[k] = arr[midIndx];
+				right[k] = arr[j];
 			}
 
 			sort(left);

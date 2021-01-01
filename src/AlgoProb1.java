@@ -1,4 +1,5 @@
-import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 
@@ -15,20 +16,32 @@ public class AlgoProb1 {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		try (Scanner scanner = new Scanner(System.in)) {
-			System.out.print("Please enter the length of the array : ");
-			int len = scanner.nextInt();
-			int[] arr = new int[len];
-			for (int i = 0; i < len; i++) {
-				System.out.println();
-				System.out.print("Please enter the element at position " + (i + 1) + " : ");
-				arr[i] = scanner.nextInt();
-			}
-			System.out.println();
-			System.out.print("Please enter how many 0s to be flipped to 1: ");
-			int k = scanner.nextInt();
-			System.out.println(solve(arr, k));
-		}
+//		try (Scanner scanner = new Scanner(System.in)) {
+//			System.out.print("Please enter the length of the array : ");
+//			int len = scanner.nextInt();
+//			int[] arr = new int[len];
+//			for (int i = 0; i < len; i++) {
+//				System.out.println();
+//				System.out.print("Please enter the element at position " + (i + 1) + " : ");
+//				arr[i] = scanner.nextInt();
+//			}
+//			System.out.println();
+//			System.out.print("Please enter how many 0s to be flipped to 1: ");
+//			int k = scanner.nextInt();
+//			System.out.println(solve(arr, k));
+//		}
+//		Long a =null;
+//	    System.out.println(0l == a);
+	    String rx = "\\d{5}(-\\d{4})";
+	    Pattern p = Pattern.compile(rx);
+	    String singleLineAddress = "test54321-5432test12345-1234abc56789-5678xyx4abc56789-5678";
+	     
+	    Matcher m = p.matcher(singleLineAddress);
+	    while (m.find()) {
+	    	String postalCode = m.group().split("-")[0];
+	    	singleLineAddress = singleLineAddress.replaceAll(m.group(), postalCode);
+	    }
+	    System.out.println(singleLineAddress);
 	}
 
 	private static int solve(int[] arr, int k) {

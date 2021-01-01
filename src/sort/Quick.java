@@ -3,62 +3,71 @@ package sort;
 import java.util.Scanner;
 
 /**
- * 
- * @author anmishra Time complexity: Avg/Best - O(n * log n) Worst - O(n^2) Space cpmplexity:
- *         Avg/Worst - O(log n)
+ * Time complexity
+ * ===============
+ *  Avg/Best - O(n * log n) 
+ *  Worst - O(n^2) 
+ *  
+ *  Space cpmplexity
+ *  ================
+ *  Worst - O(log n)
+ *  
+ * @author anmishra
  */
 public class Quick {
 
 	private static void sort(int[] arr, int len) {
-		quicksort(arr, 0, len - 1);
+		performQuickSort(arr, 0, len - 1);
 	}
 
-	private static void quicksort(int[] arr, int low, int high) {
-		int i = low, j = high;
-
-		// Set the middle elem as pivot
-		int pivot = arr[low + (high - low) / 2];
-		System.out.println("pivot: "+pivot);
-		while (i <= j) {
+	private static int determinePivotIndex (int [] arr, int start, int end) {
+		int median = (start + end) / 2;
+		int pivot = arr[median];
+		int leftCursor = start, rightCursor = end;
+		while (leftCursor < rightCursor) {
 			/**
 			 * As long as the current elem is lesser than pivot keep on
 			 * comparing the next elem from left division with pivot
 			 */
-			while (arr[i] < pivot) {
-				System.out.println(i);
-				i++;
+			while (leftCursor < rightCursor && arr[leftCursor] <= pivot) {
+				leftCursor++;
 			}
-
+			
 			/**
 			 * As long as the current elem is greater than pivot keep on
 			 * comparing the next elem from right division with pivot
 			 */
-			while (arr[j] > pivot) {
-				j--;
+			while (arr[rightCursor] > pivot) {
+				rightCursor--;
 			}
-
-			/**
+	        
+	        /**
 			 * If the current elem in left division is greater than pivot, and
 			 * the current elem in right division is lesser than pivot swap both
 			 * the elems
-			 */
-			if (i <= j) {
-				int tmp = arr[i];
-				arr[i] = arr[j];
-				arr[j] = tmp;
-				i++;
-				j--;
+			 */		
+			if (leftCursor < rightCursor) {
+				int temp = arr[leftCursor];
+				arr[leftCursor] = arr[rightCursor];
+				arr[rightCursor] = temp;
 			}
+			
 		}
-
-		// Recursively sort the left division
-		if (i < high) {
-			quicksort(arr, i, high);
+		// Bring the pivot to it's correct position
+		arr[median] = arr[rightCursor];
+		arr[rightCursor] = pivot;
+		System.out.println();
+		for (int i = 0; i < arr.length; i++) {
+			System.out.print(arr[i] + " ");
 		}
+		return rightCursor;
+	}
 
-		// Recursively sort the right division
-		if (j > low) {
-			quicksort(arr, low, j);
+	private static void performQuickSort (int [] arr, int start, int end) {
+		if (start < end) {
+			int pivotIndex = determinePivotIndex(arr, start, end);
+			performQuickSort(arr, start, pivotIndex-1);
+			performQuickSort(arr, pivotIndex + 1, end);
 		}
 	}
 

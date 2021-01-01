@@ -17,7 +17,6 @@ public class LoopedList {
 	private static Node detect(LoopedList list) {
 		Node ptr1 = list.head;
 		Node ptr2 = list.head;
-		int i = 0, j = 0;
 		while (ptr2 != null) {
 			ptr1 = ptr1.next;
 			ptr2 = ptr2.next.next;

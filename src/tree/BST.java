@@ -42,29 +42,6 @@ public class BST<E extends Comparable> {
 	}
 
 	/**
-	 * Prune a node lesser than given sum of any path the node belongs to
-	 *
-	 * @param data
-	 * @return Node<E>
-	 */
-	public Node<E> prune(int k, int sum) {
-		Node current = root;
-		if (current == null)
-			return current;
-
-		int lsum += current.data;
-		int rsum = lsum;
-
-		current.left = prune(current.left, k, lsum);
-		current.right = prune(current.right, k, rsum);
-
-		if ((lsum > rsum && lsum < k) || (rsum >= lsum && rsum < k) {
-			current = null;
-		}
-		return current;
-	}
-
-	/**
 	 * Delete a node
 	 * 
 	 * @param data

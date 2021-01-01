@@ -9,7 +9,7 @@ package map;
 public class Hashtable<K, V> {
 
 	private int capacity = 16;
-	Entry<K, V>[] buckets = new Entry[capacity];
+	HashtableEntry<K, V>[] buckets = new HashtableEntry[capacity];
 
 	/**
 	 * Add an entry
@@ -28,12 +28,12 @@ public class Hashtable<K, V> {
 			}
 		}
 		
-		buckets[hash] = new Entry<K, V>(key, val);
+		buckets[hash] = new HashtableEntry<K, V>(key, val);
 	}
 
 	private void increaseCapacity() {
 		capacity *= 2;
-		Entry<K, V>[] buckets = new Entry[capacity * 2];
+		HashtableEntry<K, V>[] buckets = new HashtableEntry[capacity * 2];
 		System.arraycopy(this.buckets, 0, buckets, 0, capacity/2);
 		this.buckets = buckets;
 	}
@@ -65,12 +65,12 @@ public class Hashtable<K, V> {
 	}
 }
 
-class Entry<K, V> {
+class HashtableEntry<K, V> {
 
 	private K key;
 	private V val;
 
-	Entry(K key, V val) {
+	HashtableEntry(K key, V val) {
 		this.key = key;
 		this.val = val;
 	}

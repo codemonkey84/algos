@@ -3,10 +3,10 @@ package map;
 public class SeparateChain {
 
 	int capacity = 17;
-	Entry[] entries;
+	SeparateChainEntry[] entries;
 
 	SeparateChain () {
-		entries = new Entry[capacity];
+		entries = new SeparateChainEntry[capacity];
 	}
 
 	public void put(String k, String v) {
@@ -18,7 +18,7 @@ public class SeparateChain {
 		if (entries[hash] != null && entries[hash].node != null) {
 			entries[hash].node.next = node;
 		} else {
-			entries[hash] = new Entry(node);
+			entries[hash] = new SeparateChainEntry(node);
 		}
 	}
 
@@ -98,11 +98,11 @@ class Node {
 	}
 }
 
-class Entry {
+class SeparateChainEntry {
 
 	Node node;
 
-	Entry (Node n) {
+	SeparateChainEntry (Node n) {
 		node = n;
 	}
 }

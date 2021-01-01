@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
+ * Time Complexity: O (log n)
+ *
  * @author anmishra Binary search implementation
  */
 public class BinarySearch {
@@ -23,25 +25,42 @@ public class BinarySearch {
 		Arrays.sort(arr);
 		System.out.print("Please enter the integer to search: ");
 		int searchedElem = scanner.nextInt();
-		System.out.println(search(arr, searchedElem, 0, len - 1));
+		System.out.println("Found recursively at "+ binarySearchRecursive(arr, searchedElem, 0, len - 1));
+		System.out.println("Found iteratively at "+ binarySearchIterative(arr, searchedElem));
 		scanner.close();
 	}
 
-	private static boolean search(int[] arr, int searchedElem, int low, int high) {
-		if (arr.length == 0) {
-			return false;
-		} else {
-			int mid = low + (high - low) / 2;
-			while (low < high) {
-				if (searchedElem == arr[mid]) {
-					return true;
-				} else if (searchedElem < arr[mid]) {
-					return search(arr, searchedElem, low, mid);
-				} else {
-					return search(arr, searchedElem, mid + 1, high);
+	private static int binarySearchIterative (int [] sortedArr, int input) {
+		if (null != sortedArr) {
+			int start = 0, end = sortedArr.length - 1;
+			while (start <= end) {
+				int mid = (start + end) / 2;
+				if (input == sortedArr[mid])
+					return mid;
+				if (input < sortedArr[mid]) {
+					end = mid - 1;
+				}
+				else {
+					start = mid + 1;
 				}
 			}
-			return false;
 		}
+		return -1;
 	}
+	private static int binarySearchRecursive(int [] sortedArr, int input, int start, int end) {
+		
+		if (start <= end) {
+			int median = (start + end) / 2;
+			if (input == sortedArr[median])
+				return median;
+			if (input < sortedArr[median]) {
+				return binarySearchRecursive(sortedArr, input, start, median - 1);
+			}
+			else {
+				return binarySearchRecursive(sortedArr, input, median + 1, end);
+			}
+		}
+		return -1;
+	}
+
 }

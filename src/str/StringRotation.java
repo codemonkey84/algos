@@ -7,8 +7,18 @@ import java.util.Scanner;
  */
 
 /**
- * @author anmishra Problem statement: Given two strings check if second string
- *         is rotated out of first one.
+ * Problem statement
+ * =================
+ * Given two strings check if second string is rotated out of first one.
+ * 
+ * Concatenate the original string with self, 2nd one is rotated of the 1st one
+ * if it exists in the concatenated string
+ * 
+ * e.g. consider the original string as "abcd", concatenated with self it becomes
+ * "abcdabcd". Now, all the possible rotated strings will be a valid substring of
+ * the concatenated string.
+ *
+ * @author anmishra
  *
  */
 public class StringRotation {

@@ -1,5 +1,11 @@
 package tree;
 
+/**
+ * Modify BST to Doubly Linked List in place
+ *
+ * @author amishra
+ *
+ */
 public class BSTToDLL {
 
 	static class Node {
@@ -17,21 +23,33 @@ public class BSTToDLL {
 	private Node prev;
 	private Node head;
 
-	private void convert(Node root) {
-		if (root == null)
+	/**
+	 * In-order traversal starting from root node:
+	 *
+	 * Recursively perform step# 1 & 4 until current node is null
+	 *
+	 * 1. left subtree of current node is getting added
+	 * 2. current node and previous node creating DLL relation
+	 * 3. Set current node as previous node for next iteration
+	 * 4. right subtree of current node is getting added
+	 *
+	 * @param node
+	 */
+	private void convert(Node node) {
+		if (node == null)
 			return;
 
-		convert(root.left);
+		convert(node.left);
 
 		if (prev != null) {
-			prev.right = root;
-			root.left = prev;
+			prev.right = node;
+			node.left = prev;
 		} else
-			head = root;
+			head = node;
 
-		prev = root;
+		prev = node;
 		
-		convert(root.right);
+		convert(node.right);
 	}
 
 
